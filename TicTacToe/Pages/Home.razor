@@ -1,0 +1,33 @@
+﻿@page "/"
+
+<PageTitle>Home</PageTitle>
+
+<table border="1">
+  @for (int row = 0; row < size; row++)
+  {
+    string y = new string($"{row}");
+    <tr>
+      @for (int col = 0; col < size; col++)
+      {
+        string x = new string($"{col}");
+        <td><div @onclick="() => doClick(x, y)" class=@Color(col, row)></div></td>
+      }
+    </tr>
+  }
+</table>
+
+@command
+
+@code
+{
+  string? command;
+
+  int size = 3;
+
+  string Color(int x, int y) => "cellWhite"; // (y % 2 == x % 2) ? "cellWhite" : "cellBlack";
+
+  void doClick(string x, string y)
+  {
+    command = $"click {x},{y}";
+  }
+}
